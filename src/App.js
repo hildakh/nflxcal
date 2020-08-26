@@ -9,14 +9,13 @@ import axios from "axios";
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
-const myEventsList = {};
-
 class App extends Component {
   constructor() {}
   componentDidMount() {
     let self = this;
     axios
-      .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")
+      // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")
+      .get("./Data/releases.js")
       .then(function (response) {
         console.log(response.data);
         let releases = response.data;
@@ -31,12 +30,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Calendar
-        localizer={localizer}
-        events={myEventsList}
-        startAccessor="start"
-        endAccessor="end"
-      />
+      <Calendar localizer={localizer} startAccessor="start" endAccessor="end" />
     );
   }
 }
