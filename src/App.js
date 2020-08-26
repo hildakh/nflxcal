@@ -25,7 +25,7 @@ const getReleases = () => {
   console.log('releases', releases)
 }
 
-const eventList = releases.map((releases)) =>
+const eventList = releases.map((releases) =>
 <tr key={releases.title}>
         <td>{releases.launch_date}</td>
         <td>{releases.id}</td>
