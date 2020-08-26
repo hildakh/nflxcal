@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import axios from "axios";
@@ -12,6 +13,8 @@ import "./App.css";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
+localizer.formats.yearHeaderFormat = "YYYY";
+// localizer.messages.year = 'Year'
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")
+      // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")  //Need to provide a secret-key to READ private bins
       .get("./Data/releases")
       .then(function (response) {
         // console.log(response.data);
@@ -61,7 +64,13 @@ class App extends Component {
             events={cal_events}
             step={30}
             defaultView="month"
-            views={["year", "month", "day"]}
+            views={{
+              day: true,
+              week: true,
+              month: true,
+              year: Year,
+            }}
+            messages={{ year: "Year" }}
             defaultDate={new Date()}
           />
         </div>
