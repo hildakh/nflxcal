@@ -25,54 +25,33 @@ const getReleases = () => {
   console.log('releases', releases)
 }
 
-  // componentDidMount() {
-  //   axios
-  //     .get("https://jsonkeeper.com/b/MVWK")
-  //     // .get("./Data/releases")
-  //     .then(function (response) {
-  //       // console.log(response.data);
-  //       let releases = response.data;
-
-  //       for (let i = 0; i < releases.length; i++) {
-  //         // console.log(releases[i]);
-  //         releases[i].start = moment.utc(releases[i].start).toDate();
-  //         releases[i].end = moment.utc(releases[i].end).toDate();
-  //       }
-  //       this.setState({
-  //         cal_events: releases,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-  render() {
-    const { cal_events } = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Netflix Event Releases</h1>
-        </header>
-        <div style={{ height: 600 }}>
-          <Calendar
-            localizer={localizer}
-            events={cal_events}
-            step={30}
-            defaultView="month"
-            views={{
-              day: true,
-              week: true,
-              month: true,
-              year: Year,
-            }}
-            messages={{ year: "Year" }}
-            defaultDate={new Date()}
-          />
-        </div>
-      </div>
+const eventList = releases.map((releases)) =>
+<tr key={releases.title}>
+        <td>{releases.launch_date}</td>
+        <td>{releases.id}</td>
+      </tr>
     );
-  }
-}
+
+    console.log('events:', eventList);
+
+    const events = [
+      {
+        allDay: 'false',
+        title: releases.title,
+        start: releases.launch_date,
+        end: releases.date + moment().add(eventList.title)
+      }
+  ];
+
+    return (
+          <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor='start'
+          endAccessor='end'
+          views={['month', 'day', 'week']}
+          style={{height: 450}}
+          />)
+  )
 
 export default App;
