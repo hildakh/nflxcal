@@ -45,14 +45,17 @@ function App() {
   ];
 
   return (
-    <Calendar
-      localizer={localizer}
-      events={events}
-      startAccessor="start"
-      endAccessor="end"
-      views={["month", "day", "week"]}
-      style={{ height: 450 }}
-    />
+    <div className="tc">
+      <h1 className="f1"> Netflix Event Releases</h1>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        views={["month", "day", "week"]}
+        style={{ height: 450 }}
+      />
+    </div>
   );
 }
 
