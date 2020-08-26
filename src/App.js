@@ -31,8 +31,8 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")  //Need to provide a secret-key to READ private bins
-      .get("./Data/releases")
+      .get("https://jsonkeeper.com/b/MVWK")
+      // .get("./Data/releases")
       .then(function (response) {
         // console.log(response.data);
         let releases = response.data;
