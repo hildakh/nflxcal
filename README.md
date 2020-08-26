@@ -1,4 +1,4 @@
-## Available Hosting
+## Hosted Options
 
 After thoughts https://pace-nflx.netlify.app/
 
