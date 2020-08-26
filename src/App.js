@@ -1,55 +1,51 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import axios from "axios";
-
-import logo from "./logo.svg";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./App.css";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
+const [releases, setReleases] = useState([]);
 localizer.formats.yearHeaderFormat = "YYYY";
 // localizer.messages.year = 'Year'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+useEffect(() => {
+  getReleases();
+});
 
-    this.state = {
-      cal_events: [],
-    };
-  }
+const getReleases = () => {
+  fetch("https://jsonkeeper.com/b/MVWK")
+  ,then(response => response.json())
+  .then(data => setReleases(data))
+  .catch(err => console.error(err))
+  console.log('releases', releases)
+}
 
-  convertDate = (date) => {
-    return moment.utc(date).toDate();
-  };
+  // componentDidMount() {
+  //   axios
+  //     .get("https://jsonkeeper.com/b/MVWK")
+  //     // .get("./Data/releases")
+  //     .then(function (response) {
+  //       // console.log(response.data);
+  //       let releases = response.data;
 
-  componentDidMount() {
-    axios
-      .get("https://jsonkeeper.com/b/MVWK")
-      // .get("./Data/releases")
-      .then(function (response) {
-        // console.log(response.data);
-        let releases = response.data;
-
-        for (let i = 0; i < releases.length; i++) {
-          // console.log(releases[i]);
-          releases[i].start = moment.utc(releases[i].start).toDate();
-          releases[i].end = moment.utc(releases[i].end).toDate();
-        }
-        this.setState({
-          cal_events: releases,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  //       for (let i = 0; i < releases.length; i++) {
+  //         // console.log(releases[i]);
+  //         releases[i].start = moment.utc(releases[i].start).toDate();
+  //         releases[i].end = moment.utc(releases[i].end).toDate();
+  //       }
+  //       this.setState({
+  //         cal_events: releases,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   render() {
     const { cal_events } = this.state;
