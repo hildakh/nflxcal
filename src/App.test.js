@@ -1,9 +1,23 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
+
+// describe("basic", () => {
+//   it("renders without crashing", () => {
+//     cy.visit("/");
+//   });
+
+//   it("should navigate to August", () => {
+//     cy.visit("/");
+
+//     cy.contains("[data-testid=month]", "August")
+//       .click()
+//       .should("have.class", "month--selected");
+//   });
+// });
