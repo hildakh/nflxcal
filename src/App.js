@@ -22,6 +22,10 @@ class App extends Component {
     };
   }
 
+  convertDate = (date) => {
+    return moment.utc(date).toDate();
+  };
+
   componentDidMount() {
     axios
       // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")
