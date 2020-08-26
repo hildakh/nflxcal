@@ -10,24 +10,37 @@ moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
 class App extends Component {
-  constructor() {}
+  constructor(props) {
+    super(props);
+
+    this.staet = {
+      cal_events: [],
+    };
+  }
+
   componentDidMount() {
     let self = this;
     axios
       // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")
-      .get("./Data/releases.js")
+      .get("./Data/releases")
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         let releases = response.data;
 
         for (let i = 0; i < releases.length; i++) {
-          console.log(releases[i]);
+          // console.log(releases[i]);
+          releases[i].start = moment.utc(releases[i].start).toDate();
+          releases[i].end = moment.utc(releases[i].end).toDate();
         }
+        self.setState({
+          cal_events: releases,
+        });
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
   render() {
     return (
       <Calendar localizer={localizer} startAccessor="start" endAccessor="end" />
