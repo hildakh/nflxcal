@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.staet = {
+    this.state = {
       cal_events: [],
     };
   }
@@ -42,6 +42,7 @@ class App extends Component {
   }
 
   render() {
+    const { cal_events } = this.state;
     return (
       <Calendar localizer={localizer} startAccessor="start" endAccessor="end" />
     );
