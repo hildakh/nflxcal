@@ -5,6 +5,8 @@ import moment from "moment";
 // import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+import ParticleComponent from "./Components/particles/ParticleComponent";
+
 import "./App.css";
 import Axios from "axios";
 
@@ -29,28 +31,27 @@ class App extends Component {
   componentDidMount() {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://jsonkeeper.com/b/MVWK";
-    Axios.get(proxyurl + url)
-      .then((response) => {
-        // .then((response) => response.json())
-        // .then((contents) => console.log(contents));
+    Axios.get(proxyurl + url).then((response) => {
+      // .then((response) => response.json())
+      // .then((contents) => console.log(contents));
 
-        let releases = response.data;
-        console.log(releases, "releases");
+      let releases = response.data;
+      console.log(releases, "releases");
 
-        for (let i = 0; i < releases.length; i++) {
-          console.log(releases[i]);
-          releases[i].launch_date = this.convertDate(
-            releases[i].start
-          ).toDate();
-          releases[i].launch_date = this.convertDate(releases[i].end).toDate();
-        }
-        this.setState({
-          cal_events: releases,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      //   for (let i = 0; i < releases.length; i++) {
+      //     console.log(releases[i]);
+      //     releases[i].launch_date = this.convertDate(
+      //       releases[i].start
+      //     ).toDate();
+      //     releases[i].launch_date = this.convertDate(releases[i].end).toDate();
+      //   }
+      //   this.setState({
+      //     cal_events: releases,
+      //   });
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+    });
   }
 
   render() {
@@ -59,6 +60,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Netflix Event Releases</h1>
+          <ParticleComponent />
         </header>
         <div style={{ height: 600 }}>
           <Calendar
