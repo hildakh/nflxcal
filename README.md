@@ -1,3 +1,20 @@
+## Hosted Options
+
+After thoughts https://pace-nflx.netlify.app/
+
+Time Boxed https://5f4626dfb4cac20008def8d9--nflx-pace.netlify.app/
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
