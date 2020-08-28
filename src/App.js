@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import Year from "./year";
+// import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+
 import "./App.css";
+import Axios from "axios";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -28,25 +29,28 @@ class App extends Component {
   componentDidMount() {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://jsonkeeper.com/b/MVWK";
-    fetch(proxyurl + url)
-      .then((response) => response.json())
-      .then((contents) => console.log(contents));
+    Axios.get(proxyurl + url)
+      .then((response) => {
+        // .then((response) => response.json())
+        // .then((contents) => console.log(contents));
 
-    // let releases = response.data;
-    // console.log(contents);
+        let releases = response.data;
+        console.log(releases, "releases");
 
-    //   for (let i = 0; i < releases.length; i++) {
-    //     // console.log(releases[i]);
-    //     releases[i].start = moment.utc(releases[i].start).toDate();
-    //     releases[i].end = moment.utc(releases[i].end).toDate();
-    //   }
-    //   this.setState({
-    //     cal_events: releases,
-    //   });
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+        for (let i = 0; i < releases.length; i++) {
+          console.log(releases[i]);
+          releases[i].launch_date = this.convertDate(
+            releases[i].start
+          ).toDate();
+          releases[i].launch_date = this.convertDate(releases[i].end).toDate();
+        }
+        this.setState({
+          cal_events: releases,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -62,13 +66,13 @@ class App extends Component {
             events={cal_events}
             step={30}
             defaultView="month"
-            views={{
-              day: true,
-              week: true,
-              month: true,
-              year: true,
-            }}
-            messages={{ year: "Year" }}
+            // views={{
+            //   day: true,
+            //   week: true,
+            //   month: true,
+            //   // year: true,
+            // }}
+            // messages={{ year: "Year" }}
             defaultDate={new Date()}
           />
         </div>
