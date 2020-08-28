@@ -7,7 +7,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import axios from "axios";
 
-import logo from "./logo.svg";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./App.css";
 
