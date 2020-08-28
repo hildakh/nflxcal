@@ -5,11 +5,10 @@ import moment from "moment";
 import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import axios from "axios";
+import ParticleComponent from "./Components/particles/ParticleComponent";
 
-import logo from "./logo.svg";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./App.css";
+import Axios from "axios";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -30,31 +29,36 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios
-      // .get("https://api.jsonbin.io/b/5f45f420514ec5112d0e794a")  //Need to provide a secret-key to READ private bins
-      .get("./Data/releases")
-      .then(function (response) {
-        // console.log(response.data);
-        let releases = response.data;
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://jsonkeeper.com/b/MVWK";
+    Axios.get(proxyurl + url).then((response) => {
+      // .then((response) => response.json())
+      // .then((contents) => console.log(contents));
 
-        for (let i = 0; i < releases.length; i++) {
-          // console.log(releases[i]);
-          releases[i].start = moment.utc(releases[i].start).toDate();
-          releases[i].end = moment.utc(releases[i].end).toDate();
-        }
-        this.setState({
-          cal_events: releases,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      let releases = response.data;
+      console.log(releases, "releases");
+
+      //   for (let i = 0; i < releases.length; i++) {
+      //     console.log(releases[i]);
+      //     releases[i].launch_date = this.convertDate(
+      //       releases[i].start
+      //     ).toDate();
+      //     releases[i].launch_date = this.convertDate(releases[i].end).toDate();
+      //   }
+      //   this.setState({
+      //     cal_events: releases,
+      //   });
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+    });
   }
 
   render() {
     const { cal_events } = this.state;
     return (
       <div className="App">
+        {/* <ParticleComponent /> */}
         <header className="App-header">
           <h1 className="App-title">Netflix Event Releases</h1>
         </header>
@@ -68,7 +72,7 @@ class App extends Component {
               day: true,
               week: true,
               month: true,
-              year: Year,
+              year: true,
             }}
             messages={{ year: "Year" }}
             defaultDate={new Date()}

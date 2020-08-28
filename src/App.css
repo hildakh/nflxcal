@@ -15,12 +15,10 @@
 }
 
 .App-title {
+  font-family: "SEGA LOGO FONT";
   font-size: 5.5em;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-weight: 300;
-  letter-spacing: -1px;
-  font-style: italic;
+  font-weight: 500;
+  color: #dd3e54;
   text-align: center;
 }
 
@@ -35,4 +33,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "SEGA LOGO FONT";
+  font-style: normal;
+  font-weight: normal;
+  src: local("SEGA LOGO FONT"), url("SEGA.TTF") format("TTF");
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }
