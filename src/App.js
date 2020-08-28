@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-// import Year from "./year";
+import Year from "./year";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import ParticleComponent from "./Components/particles/ParticleComponent";
@@ -58,9 +58,9 @@ class App extends Component {
     const { cal_events } = this.state;
     return (
       <div className="App">
+        {/* <ParticleComponent /> */}
         <header className="App-header">
           <h1 className="App-title">Netflix Event Releases</h1>
-          <ParticleComponent />
         </header>
         <div style={{ height: 600 }}>
           <Calendar
@@ -68,13 +68,13 @@ class App extends Component {
             events={cal_events}
             step={30}
             defaultView="month"
-            // views={{
-            //   day: true,
-            //   week: true,
-            //   month: true,
-            //   // year: true,
-            // }}
-            // messages={{ year: "Year" }}
+            views={{
+              day: true,
+              week: true,
+              month: true,
+              year: true,
+            }}
+            messages={{ year: "Year" }}
             defaultDate={new Date()}
           />
         </div>
